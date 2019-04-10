@@ -1,0 +1,31 @@
+//Chamada AJAX para fazer o Login na aplicação e receber o TOKEN
+
+var dadosLogin = { Username: "Fred", Password: "admin" };
+
+axios.post("http://localhost:57179/api/Login", dadosLogin)
+	.then(function (response) {
+	console.log(response);
+	})
+	.catch(function (error) {
+	// handle error
+	console.log(error);
+	});
+
+
+
+//Chamada AJAX para fazer CONSUMIR A API enviando o TOKEN que foi recebido no passo ANTERIOR
+
+var token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImZyZWQiLCJuYmYiOjE1NTQ2NDk3NTQsImV4cCI6MTU1NDY1Njk1NCwiaWF0IjoxNTU0NjQ5NzU0LCJpc3MiOiJodHRwczovL2NhbGVuZGFyaW9hcGkuc2FvbHVjYXMuZWR1LmJyIiwiYXVkIjoiaHR0cHM6Ly9jYWxlbmRhcmlvLnNhb2x1Y2FzLmVkdS5iciJ9.8lhORBQwKfNNcB0xkVDz6q3PCxL72qcZBRjNwhk3Dno";
+var config = {
+	'Authorization': token
+};
+
+axios
+	.get("http://localhost:57179/api/Values", { headers: config })
+	.then(function (response) {
+	console.log(response);
+	})
+	.catch(function (error) {
+	// handle error
+	console.log(error);
+	});
